@@ -12,5 +12,8 @@ COPY login/ /usr/share/nginx/html/login/
 # Copy images content to /imagens/
 COPY imagens/ /usr/share/nginx/html/imagens/
 
+# Garantir permissões de leitura corretas para os arquivos estáticos
+RUN chmod -R 755 /usr/share/nginx/html
+
 # Expose port 80
 EXPOSE 80
