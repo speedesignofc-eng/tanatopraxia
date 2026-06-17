@@ -14,5 +14,3 @@ COPY imagens/ /usr/share/nginx/html/imagens/
 
 # Expose port 80
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
