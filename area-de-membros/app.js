@@ -66,28 +66,15 @@ function showNotification(message, type = 'error') {
     }, 4500);
 }
 
-// Get materials based on user plan and orderbumps
+// Get materials based on user plan
 function getVisibleMaterials() {
     if (!state.user) return [];
     if (state.user.plano === 'completo') {
         return state.materials;
     }
     
-    // For basic plan, they have m_principal, plus any orderbumps they bought
-    const userBumps = Array.isArray(state.user.orderbumps) ? state.user.orderbumps : [];
-    
-    return state.materials.filter(m => {
-        if (m.id === 'm_principal') return true;
-        
-        // Check if user bought the orderbump for this bonus
-        return userBumps.some(bump => {
-            const bumpLower = String(bump).toLowerCase();
-            if (m.id === 'm_bonus1' && (bumpLower.includes('necromaquiagem') || bumpLower.includes('atlas') || bumpLower.includes('bonus1') || bumpLower.includes('bump_abc123'))) return true;
-            if (m.id === 'm_bonus2' && (bumpLower.includes('conservacao') || bumpLower.includes('protocolo') || bumpLower.includes('bonus2'))) return true;
-            if (m.id === 'm_bonus3' && (bumpLower.includes('casos') || bumpLower.includes('comentados') || bumpLower.includes('bonus3'))) return true;
-            return false;
-        });
-    });
+    // Para plano básico, exibe apenas o material principal
+    return state.materials.filter(m => m.id === 'm_principal');
 }
 
 // Check if user is logged in
