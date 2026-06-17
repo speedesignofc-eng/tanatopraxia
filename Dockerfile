@@ -9,9 +9,6 @@ COPY area-de-membros/ /usr/share/nginx/html/area-de-membros/
 # Copy login redirect content to /login/
 COPY login/ /usr/share/nginx/html/login/
 
-# Copy images content to /imagens/
-COPY imagens/ /usr/share/nginx/html/imagens/
-
 # Garantir permissões de leitura corretas para os arquivos estáticos
 RUN chmod -R 755 /usr/share/nginx/html
 
