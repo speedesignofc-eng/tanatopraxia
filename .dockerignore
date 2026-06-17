@@ -1,0 +1,9 @@
+node_modules
+Entregaveis
+back-redirect
+.git
+.gemini
+.tempmediaStorage
+package-lock.json
+package.json
+server.py

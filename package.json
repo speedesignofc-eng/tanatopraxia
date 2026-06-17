@@ -1,0 +1,15 @@
+{
+  "name": "tanatopraxia-projeto",
+  "version": "1.0.0",
+  "description": "Projeto +350 Técnicas de Tanatopraxia",
+  "scripts": {
+    "dev": "live-server --port=3000 --host=localhost --open=/area-de-membros/index.html",
+    "dev:vendas": "live-server --port=3000 --host=localhost --open=/paginadevendas/index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.108.2"
+  }
+}
