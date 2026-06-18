@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFAQ();
     initUpsellModal();
     initSmoothScroll();
+    initUtmTracking();
 });
 
 /* ==========================================================================
@@ -151,4 +152,40 @@ function initSmoothScroll() {
             }
         });
     });
+}
+
+/* ==========================================================================
+   5. PASS UTM PARAMETERS TO CHECKOUT
+   ========================================================================== */
+function initUtmTracking() {
+    // Executa na inicialização para os links já presentes no HTML
+    passUtms();
+
+    // Garante o repasse em eventos de clique nos links da ggcheckout
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.href && link.href.includes('ggcheckout.app')) {
+            passUtms();
+        }
+    });
+
+    function passUtms() {
+        const params = window.location.search;
+        if (!params) return;
+        
+        document.querySelectorAll('a').forEach(link => {
+            if (link.href && link.href.includes('ggcheckout.app')) {
+                try {
+                    const url = new URL(link.href);
+                    const searchParams = new URLSearchParams(params);
+                    searchParams.forEach((value, key) => {
+                        url.searchParams.set(key, value);
+                    });
+                    link.href = url.toString();
+                } catch (err) {
+                    console.error("Erro ao injetar UTMs no link:", err);
+                }
+            }
+        });
+    }
 }
