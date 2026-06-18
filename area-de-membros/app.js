@@ -340,7 +340,7 @@ function renderDashboard() {
                 <p class="cert-desc" id="cert-status-desc">
                     ${isFinished
                         ? 'Parabéns! Você concluiu todos os materiais. Preencha seu nome para liberar o seu certificado.'
-                        : `Conclua a leitura de todos os \${getVisibleMaterials().length} materiais (marcando os checks correspondentes) para liberar seu certificado.`}
+                        : 'Conclua a leitura de todos os ' + getVisibleMaterials().length + ' materiais (marcando os checks correspondentes) para liberar seu certificado.'}
                 </p>
                 
                 <div class="cert-form" id="cert-form-container" style="display: ${isFinished ? 'flex' : 'none'}">
