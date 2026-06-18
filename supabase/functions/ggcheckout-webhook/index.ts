@@ -64,22 +64,43 @@ Deno.serve(async (req: Request) => {
     const products = payload.products || [];
     const orderbumps: string[] = [];
     for (const prod of products) {
-      if (prod.type === "orderbump") {
-        orderbumps.push(prod.title || prod.id);
+      const prodTitle = prod.title || "";
+      const isOrderbumpProduct = prod.type === "orderbump" || 
+                                 prodTitle.includes("Registros Funerários") || 
+                                 prodTitle.includes("Registros Funerarios") || 
+                                 prodTitle.includes("Modelos de Registros");
+      if (isOrderbumpProduct) {
+        orderbumps.push(prodTitle || prod.id);
       }
     }
 
-    // Fetch existing aluno to merge orderbumps if they already exist
+    // Check if the main product itself is the orderbump (separate purchase)
+    if (mainProductTitle.includes("Registros Funerários") || 
+        mainProductTitle.includes("Registros Funerarios") || 
+        mainProductTitle.includes("Modelos de Registros")) {
+      if (!orderbumps.includes(mainProductTitle)) {
+        orderbumps.push(mainProductTitle);
+      }
+    }
+
+    // Fetch existing aluno to merge orderbumps and preserve plan if they already exist
     const { data: existingAluno } = await supabase
       .from("alunos")
-      .select("orderbumps")
+      .select("plano, orderbumps")
       .eq("email", customerEmail)
       .maybeSingle();
 
     let finalOrderbumps = orderbumps;
-    if (existingAluno && existingAluno.orderbumps) {
-      const currentBumps = Array.isArray(existingAluno.orderbumps) ? existingAluno.orderbumps : [];
-      finalOrderbumps = [...new Set([...currentBumps, ...orderbumps])];
+    let finalPlano = plano;
+    if (existingAluno) {
+      if (existingAluno.orderbumps) {
+        const currentBumps = Array.isArray(existingAluno.orderbumps) ? existingAluno.orderbumps : [];
+        finalOrderbumps = [...new Set([...currentBumps, ...orderbumps])];
+      }
+      // Se o aluno já existe e possui plano completo, preservamos
+      if (existingAluno.plano === "completo") {
+        finalPlano = "completo";
+      }
     }
 
     // Create or update student in database
@@ -88,7 +109,7 @@ Deno.serve(async (req: Request) => {
       .upsert({
         email: customerEmail,
         nome: customerName,
-        plano: plano,
+        plano: finalPlano,
         orderbumps: finalOrderbumps
       });
 
@@ -98,6 +119,24 @@ Deno.serve(async (req: Request) => {
         status: 500,
         headers: { "Content-Type": "application/json" }
       });
+    }
+
+    // Check if customer has the registros orderbump to show in the email
+    const hasRegistros = finalOrderbumps.some(bump => 
+      bump.includes("Registros Funerários") || 
+      bump.includes("Registros Funerarios") || 
+      bump.includes("Modelos de Registros")
+    );
+
+    let orderbumpsHtml = "";
+    if (hasRegistros) {
+      orderbumpsHtml = `
+            <!-- Alerta de Material Adicional Liberado (Orderbump) -->
+            <div style="background-color: #f4faf7; border-left: 4px solid #7ed957; padding: 15px 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 20px; font-family: sans-serif; text-align: left;">
+                <p style="margin: 0 0 5px 0; color: #0f3d2e; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">🎉 MATERIAL ADICIONAL LIBERADO!</p>
+                <p style="margin: 0; color: #1b3a30; font-size: 14px;">O seu bônus adicional <strong>+200 Modelos de Registros Funerários Prontos</strong> também já está disponível na sua conta!</p>
+            </div>
+      `;
     }
 
     // 3. Send email via Resend
@@ -211,7 +250,9 @@ Deno.serve(async (req: Request) => {
         </div>
         <div class="content">
             <h2>Olá, ${customerName}!</h2>
-            <p>Parabéns pela sua aquisição! Seu pagamento foi confirmado e seu acesso ao treinamento <strong>+350 Técnicas Ilustradas de Tanatopraxia</strong> já está liberado.</p>
+            <p>Parabéns pela aquisição do <strong>+350 Técnicas Ilustradas de Tanatopraxia (${finalPlano === 'completo' ? 'Completo' : 'Básico'})</strong>! Seu acesso exclusivo à nossa área de membros privada já está liberado.</p>
+            
+            ${orderbumpsHtml}
             
             <div class="info-box">
                 <p><strong>⚠️ ATENÇÃO - INFORMAÇÃO IMPORTANTE:</strong></p>
@@ -251,7 +292,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Tanatopraxia Oficial <suporte@350tecnicastanatopraxia.hyzencompra.shop>",
         to: customerEmail,
-        subject: "Acesso Liberado: +350 Técnicas Ilustradas de Tanatopraxia",
+        subject: hasRegistros ? "Acesso Liberado: +350 Técnicas Ilustradas de Tanatopraxia + Adicional" : "Acesso Liberado: +350 Técnicas Ilustradas de Tanatopraxia",
         html: emailHtml
       })
     });
@@ -261,7 +302,7 @@ Deno.serve(async (req: Request) => {
       console.error("Resend send email error:", resendError);
     }
 
-    return new Response(JSON.stringify({ success: true, plano: plano, orderbumps: finalOrderbumps }), {
+    return new Response(JSON.stringify({ success: true, plano: finalPlano, orderbumps: finalOrderbumps }), {
       status: 200,
       headers: { 
         "Content-Type": "application/json",

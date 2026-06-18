@@ -43,6 +43,16 @@ const state = {
             banner: 'https://i.ibb.co/7xX69HBc/image.png',
             link: 'https://drive.google.com/file/d/1q1YbfbeQQ0arFsEdnUsBOuwrXYIhUpRk/view',
             checked: false
+        },
+        {
+            id: 'm_orderbump_registros',
+            type: 'Adicional Contratado',
+            title: '+200 Modelos de Registros Funerários Prontos',
+            description: 'O material reúne mais de 200 modelos prontos para uso, incluindo fichas de atendimento, formulários operacionais, registros de procedimentos, checklists de conferência, controles internos, documentos de identificação, registros de preparação, protocolos de acompanhamento e diversos outros modelos utilizados na rotina funerária.',
+            banner: 'https://i.ibb.co/kFXQDLY/image.png',
+            link: 'https://drive.google.com/file/d/1cJZBeTFJmboi0hA96j8vA0PpOhCheeii/view',
+            checked: false,
+            isOrderbump: true
         }
     ]
 };
@@ -69,12 +79,32 @@ function showNotification(message, type = 'error') {
 // Get materials based on user plan
 function getVisibleMaterials() {
     if (!state.user) return [];
+    
+    // Filtra materiais base de acordo com o plano do aluno
+    let visible = [];
     if (state.user.plano === 'completo') {
-        return state.materials;
+        visible = state.materials.filter(m => !m.isOrderbump);
+    } else {
+        visible = state.materials.filter(m => m.id === 'm_principal');
     }
     
-    // Para plano básico, exibe apenas o material principal
-    return state.materials.filter(m => m.id === 'm_principal');
+    // Adiciona os orderbumps que o aluno de fato adquiriu
+    const userBumps = state.user.orderbumps || [];
+    const orderbumpMaterials = state.materials.filter(m => m.isOrderbump);
+    
+    orderbumpMaterials.forEach(ob => {
+        const purchased = userBumps.some(bump => 
+            bump.toLowerCase().includes('registros funerários') || 
+            bump.toLowerCase().includes('registros funerarios') ||
+            bump.toLowerCase().includes('registros') ||
+            bump.toLowerCase().includes('m_orderbump_registros')
+        );
+        if (purchased) {
+            visible.push(ob);
+        }
+    });
+    
+    return visible;
 }
 
 // Check if user is logged in
@@ -310,7 +340,7 @@ function renderDashboard() {
                 <p class="cert-desc" id="cert-status-desc">
                     ${isFinished
                         ? 'Parabéns! Você concluiu todos os materiais. Preencha seu nome para liberar o seu certificado.'
-                        : 'Conclua a leitura de todos os 4 materiais (marcando os checks correspondentes) para liberar seu certificado.'}
+                        : `Conclua a leitura de todos os \${getVisibleMaterials().length} materiais (marcando os checks correspondentes) para liberar seu certificado.`}
                 </p>
                 
                 <div class="cert-form" id="cert-form-container" style="display: ${isFinished ? 'flex' : 'none'}">
@@ -562,7 +592,7 @@ function updateProgressUI() {
             certCard.classList.add('locked');
         }
         if (certDesc) {
-            certDesc.textContent = 'Conclua a leitura de todos os 4 materiais (marcando os checks correspondentes) para liberar seu certificado.';
+            certDesc.textContent = 'Conclua a leitura de todos os ' + getVisibleMaterials().length + ' materiais (marcando os checks correspondentes) para liberar seu certificado.';
         }
         if (certForm) {
             certForm.style.display = 'none';
