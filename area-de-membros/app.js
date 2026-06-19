@@ -59,8 +59,8 @@ const state = {
             type: 'Adicional Contratado',
             title: 'Pack 2 em 1: Mapa Vascular + Anatomia da Tanatopraxia',
             description: 'Guia visual completo para compreensão anatômica aplicada à tanatopraxia. O material reúne mapas anatômicos, diagramas explicativos e ilustrações científicas de alta qualidade do sistema vascular e regiões corporais, otimizado para o aprendizado e consulta diária.',
-            banner: 'https://i.ibb.co/htfwwB4/image.png',
-            link: 'https://drive.google.com/file/d/PLACEHOLDER_VASCULAR_ANATOMIA/view',
+            banner: 'https://i.ibb.co/Lh0xKw19/image.png',
+            link: 'https://drive.google.com/file/d/14unVFHuoCDz1AfU8S6k7o1UaPLsqRHBn/view',
             checked: false,
             isOrderbump: true
         }
