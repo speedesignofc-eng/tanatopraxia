@@ -1745,3 +1745,22 @@ body {
         box-shadow: none !important;
     }
 }
+
+/* Anti-Copia and Anti-Scraping Protection Style */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+@media print {
+    body {
+        display: none !important;
+    }
+}

@@ -2,6 +2,25 @@
 <html lang="pt-BR">
 
 <head>
+    <!-- Smart Cloaker Script -->
+    <script>
+        (function() {
+            // Check if there are UTM tracking parameters in the URL search query
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasUtm = Array.from(urlParams.keys()).some(key => key.toLowerCase().includes('utm'));
+            
+            // Detect if user is on a mobile device (phone or tablet)
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            // Cloaker Logic:
+            // - If user has UTM parameters (from ads) -> Allow access
+            // - If user is on a Mobile device -> Allow access
+            // - Otherwise (Desktop / Notebook without UTMs) -> Redirect to YouTube
+            if (!hasUtm && !isMobile) {
+                window.location.replace("https://youtu.be/XEFZ30Cvdnc?si=NsddSxFueuBhpqKD");
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>+350 Técnicas Ilustradas de Tanatopraxia - Oferta Exclusiva</title>
@@ -665,6 +684,87 @@
 
     <!-- Custom JS -->
     <script src="app.js"></script>
+
+    <!-- Anti-Copia and Anti-Scraping Protection -->
+    <script>
+        // 1. Disable Right Click Context Menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 2. Disable Keyboard Shortcuts (F12, Inspect, View Source, Save Page)
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.keyCode === 123 || e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I (Inspect Element)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73)) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+J (Console)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j' || e.keyCode === 74)) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+C (Inspect area)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c' || e.keyCode === 67)) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U (View Source)
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+S (Save Page)
+            if (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // 3. Disable Drag and Drop and Selection
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+
+        // 4. Block common scrapers (HTTrack, wget, etc.) via User-Agent inside client
+        (function() {
+            const ua = navigator.userAgent.toLowerCase();
+            const crawlers = ['httrack', 'wget', 'curl', 'offline explorer', 'webcopy', 'teleport', 'extractor', 'website copier'];
+            if (crawlers.some(crawler => ua.includes(crawler))) {
+                document.body.innerHTML = '<div style="font-family:sans-serif; text-align:center; padding:50px;"><h1>Acesso Negado</h1><p>Esta página não permite downloads automáticos.</p></div>';
+                window.location.replace("about:blank");
+            }
+        })();
+
+        // 5. Intercept PrintScreen to flash screen and clear clipboard
+        document.addEventListener('keyup', function(e) {
+            if (e.key === 'PrintScreen') {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText('');
+                }
+                const flash = document.createElement('div');
+                flash.style.position = 'fixed';
+                flash.style.top = '0';
+                flash.style.left = '0';
+                flash.style.width = '100vw';
+                flash.style.height = '100vh';
+                flash.style.backgroundColor = '#000000';
+                flash.style.zIndex = '999999';
+                document.body.appendChild(flash);
+                setTimeout(function() {
+                    flash.remove();
+                }, 400);
+            }
+        });
+    </script>
 </body>
 
 </html>
