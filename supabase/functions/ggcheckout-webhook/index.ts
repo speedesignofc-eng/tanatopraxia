@@ -68,7 +68,10 @@ Deno.serve(async (req: Request) => {
       const isOrderbumpProduct = prod.type === "orderbump" || 
                                  prodTitle.includes("Registros Funerários") || 
                                  prodTitle.includes("Registros Funerarios") || 
-                                 prodTitle.includes("Modelos de Registros");
+                                 prodTitle.includes("Modelos de Registros") ||
+                                 prodTitle.includes("Mapa Vascular") ||
+                                 prodTitle.includes("Anatomia da Tanatopraxia") ||
+                                 prodTitle.includes("Vascular");
       if (isOrderbumpProduct) {
         orderbumps.push(prodTitle || prod.id);
       }
@@ -77,7 +80,10 @@ Deno.serve(async (req: Request) => {
     // Check if the main product itself is the orderbump (separate purchase)
     if (mainProductTitle.includes("Registros Funerários") || 
         mainProductTitle.includes("Registros Funerarios") || 
-        mainProductTitle.includes("Modelos de Registros")) {
+        mainProductTitle.includes("Modelos de Registros") ||
+        mainProductTitle.includes("Mapa Vascular") ||
+        mainProductTitle.includes("Anatomia da Tanatopraxia") ||
+        mainProductTitle.includes("Vascular")) {
       if (!orderbumps.includes(mainProductTitle)) {
         orderbumps.push(mainProductTitle);
       }
@@ -121,20 +127,36 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    // Check if customer has the registros orderbump to show in the email
+    // Check if customer has the orderbumps to show in the email
     const hasRegistros = finalOrderbumps.some(bump => 
       bump.includes("Registros Funerários") || 
       bump.includes("Registros Funerarios") || 
       bump.includes("Modelos de Registros")
     );
 
+    const hasVascularAnatomia = finalOrderbumps.some(bump => 
+      bump.includes("Mapa Vascular") || 
+      bump.includes("Anatomia da Tanatopraxia") || 
+      bump.includes("Vascular")
+    );
+
     let orderbumpsHtml = "";
     if (hasRegistros) {
-      orderbumpsHtml = `
-            <!-- Alerta de Material Adicional Liberado (Orderbump) -->
+      orderbumpsHtml += `
+            <!-- Alerta de Material Adicional Liberado (Orderbump Registros) -->
             <div style="background-color: #f4faf7; border-left: 4px solid #7ed957; padding: 15px 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 20px; font-family: sans-serif; text-align: left;">
                 <p style="margin: 0 0 5px 0; color: #0f3d2e; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">🎉 MATERIAL ADICIONAL LIBERADO!</p>
                 <p style="margin: 0; color: #1b3a30; font-size: 14px;">O seu bônus adicional <strong>+200 Modelos de Registros Funerários Prontos</strong> também já está disponível na sua conta!</p>
+            </div>
+      `;
+    }
+
+    if (hasVascularAnatomia) {
+      orderbumpsHtml += `
+            <!-- Alerta de Material Adicional Liberado (Orderbump Vascular + Anatomia) -->
+            <div style="background-color: #f4faf7; border-left: 4px solid #7ed957; padding: 15px 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 20px; font-family: sans-serif; text-align: left;">
+                <p style="margin: 0 0 5px 0; color: #0f3d2e; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">🎉 MATERIAL ADICIONAL LIBERADO!</p>
+                <p style="margin: 0; color: #1b3a30; font-size: 14px;">O seu bônus adicional <strong>Pack 2 em 1: Mapa Vascular + Anatomia da Tanatopraxia</strong> também já está disponível na sua conta!</p>
             </div>
       `;
     }
@@ -292,7 +314,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Tanatopraxia Oficial <suporte@350tecnicastanatopraxia.hyzencompra.shop>",
         to: customerEmail,
-        subject: hasRegistros ? "Acesso Liberado: +350 Técnicas Ilustradas de Tanatopraxia + Adicional" : "Acesso Liberado: +350 Técnicas Ilustradas de Tanatopraxia",
+        subject: (hasRegistros || hasVascularAnatomia) ? "Acesso Liberado: +350 Técnicas Ilustradas de Tanatopraxia + Adicional" : "Acesso Liberado: +350 Técnicas Ilustradas de Tanatopraxia",
         html: emailHtml
       })
     });

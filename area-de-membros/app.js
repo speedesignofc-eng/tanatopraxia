@@ -53,6 +53,16 @@ const state = {
             link: 'https://drive.google.com/file/d/1cJZBeTFJmboi0hA96j8vA0PpOhCheeii/view',
             checked: false,
             isOrderbump: true
+        },
+        {
+            id: 'm_orderbump_vascular_anatomia',
+            type: 'Adicional Contratado',
+            title: 'Pack 2 em 1: Mapa Vascular + Anatomia da Tanatopraxia',
+            description: 'Guia visual completo para compreensão anatômica aplicada à tanatopraxia. O material reúne mapas anatômicos, diagramas explicativos e ilustrações científicas de alta qualidade do sistema vascular e regiões corporais, otimizado para o aprendizado e consulta diária.',
+            banner: 'https://i.ibb.co/htfwwB4/image.png',
+            link: 'https://drive.google.com/file/d/PLACEHOLDER_VASCULAR_ANATOMIA/view',
+            checked: false,
+            isOrderbump: true
         }
     ]
 };
@@ -93,12 +103,22 @@ function getVisibleMaterials() {
     const orderbumpMaterials = state.materials.filter(m => m.isOrderbump);
     
     orderbumpMaterials.forEach(ob => {
-        const purchased = userBumps.some(bump => 
-            bump.toLowerCase().includes('registros funerários') || 
-            bump.toLowerCase().includes('registros funerarios') ||
-            bump.toLowerCase().includes('registros') ||
-            bump.toLowerCase().includes('m_orderbump_registros')
-        );
+        let purchased = false;
+        if (ob.id === 'm_orderbump_registros') {
+            purchased = userBumps.some(bump => 
+                bump.toLowerCase().includes('registros funerários') || 
+                bump.toLowerCase().includes('registros funerarios') ||
+                bump.toLowerCase().includes('registros') ||
+                bump.toLowerCase().includes('m_orderbump_registros')
+            );
+        } else if (ob.id === 'm_orderbump_vascular_anatomia') {
+            purchased = userBumps.some(bump => 
+                bump.toLowerCase().includes('mapa vascular') || 
+                bump.toLowerCase().includes('anatomia da tanatopraxia') || 
+                bump.toLowerCase().includes('vascular') || 
+                bump.toLowerCase().includes('m_orderbump_vascular_anatomia')
+            );
+        }
         if (purchased) {
             visible.push(ob);
         }
