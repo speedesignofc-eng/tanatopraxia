@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initUpsellModal();
     initSmoothScroll();
     initUtmTracking();
+    initExitIntentAndBackRedirect();
 });
 
 /* ==========================================================================
@@ -188,4 +189,49 @@ function initUtmTracking() {
             }
         });
     }
+}
+
+/* ==========================================================================
+   6. EXIT INTENT AND BACK-REDIRECT TRIGGERS
+   ========================================================================== */
+function initExitIntentAndBackRedirect() {
+    const backUrl = "../back-redirect/" + window.location.search;
+    
+    // Evita loop no redirecionamento caso a página seja recarregada ou algo similar
+    if (window.location.pathname.includes('/back-redirect/')) return;
+
+    let isNavigatingAway = false;
+
+    // Monitora cliques para checkouts para não disparar a saída durante a navegação
+    function setNavigatingAway(e) {
+        const link = e.target.closest("a");
+        if (link && link.href && link.href.includes("ggcheckout.app")) {
+            isNavigatingAway = true;
+        }
+    }
+    document.addEventListener("mousedown", setNavigatingAway);
+    document.addEventListener("touchstart", setNavigatingAway);
+
+    // 1. Lógica do Back-Redirect (Botão Voltar do Navegador)
+    // Empurramos um estado fictício para o histórico do navegador.
+    history.pushState({ backRedirect: true }, "", window.location.href);
+
+    window.addEventListener("popstate", (event) => {
+        if (isNavigatingAway) return;
+        // Se o usuário tentar voltar para o estado anterior (que não possui a flag backRedirect),
+        // redirecionamos para a página com desconto.
+        if (!event.state || !event.state.backRedirect) {
+            window.location.href = backUrl;
+        }
+    });
+
+    // 2. Lógica de Intenção de Saída (Cursor saindo pelo topo da tela)
+    let exitTriggered = false;
+    document.addEventListener("mouseleave", (event) => {
+        if (isNavigatingAway) return;
+        if (!exitTriggered && event.clientY < 20) {
+            exitTriggered = true;
+            window.location.href = backUrl;
+        }
+    });
 }

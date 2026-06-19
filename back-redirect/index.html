@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta Especial de Retenção - Última Chance</title>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1313456440445796');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1313456440445796&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- UTMify Pixel Code -->
+    <script>
+      window.pixelId = "6a3335d740dc7f24df2f29d5";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+      document.head.appendChild(a);
+    </script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Sales Page CSS Styles -->
+    <link rel="stylesheet" href="../paginadevendas/style.css">
+
+    <!-- Custom Style Overrides for Retention Offer Page -->
+    <style>
+        .retention-banner {
+            background: radial-gradient(circle at top right, #113f30 0%, #071f16 100%);
+            color: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 4px solid #7ed957;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .retention-badge {
+            background-color: #7ed957;
+            color: #071f16;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 850;
+            font-size: 11px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            animation: pulseBadge 2.2s infinite ease-in-out;
+        }
+
+        @keyframes pulseBadge {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(126, 217, 87, 0.4);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(126, 217, 87, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(126, 217, 87, 0);
+            }
+        }
+
+        .retention-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .retention-desc {
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .retention-desc strong {
+            color: #7ed957;
+            font-weight: 700;
+        }
+
+        .retention-timer-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 8px 16px;
+            border-radius: var(--border-radius-md);
+            border: 1px dashed rgba(126, 217, 87, 0.4);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .timer-label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .timer-value {
+            color: #7ed957;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .old-price-anchor {
+            font-size: 13px;
+            text-decoration: line-through;
+            color: rgba(27, 58, 48, 0.6);
+            display: block;
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+
+        /* Adjustments for direct checkout button */
+        .plan-btn.basic-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 54px;
+            padding: 0 24px;
+            font-size: 15px;
+            text-decoration: none;
+            background-color: transparent;
+            border: 2px solid var(--primary-dark);
+            color: var(--primary-dark);
+        }
+
+        .plan-btn.basic-btn:hover {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+        }
+
+        .plan-btn.complete-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 58px;
+            padding: 0 24px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .plans-timer-header {
+            margin-top: 30px;
+            margin-bottom: 25px;
+        }
+
+        .timer-pre-title {
+            color: var(--primary-dark);
+            font-weight: 800;
+        }
+
+        .timer-main-title {
+            font-size: 28px;
+            color: var(--primary-dark);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SECTION 1: Banner de Retenção -->
+    <header class="retention-banner">
+        <div class="retention-badge">
+            <i class="fa-solid fa-triangle-exclamation"></i> Oferta Única e Exclusiva
+        </div>
+        <h1 class="retention-title">ESPERE! NÃO VÁ EMBORA DE MÃOS VAZIAS!</h1>
+        <p class="retention-desc">
+            Identificamos que você tentou sair. Apenas para quem está nesta página agora, liberamos um <strong>Desconto de Até 50%</strong> para você não perder essa chance de se profissionalizar na área de Tanatopraxia!
+        </p>
+        <div class="retention-timer-box">
+            <span class="timer-label"><i class="fa-regular fa-clock"></i> Essa oferta expira em:</span>
+            <span id="countdown-timer" class="timer-value">10:00</span>
+        </div>
+    </header>
+
+    <!-- SECTION 2: Planos com Desconto -->
+    <section id="planos" class="plans-section" style="padding-top: 10px;">
+        <div class="container">
+            <div class="plans-timer-header" style="text-align: center;">
+                <span class="timer-pre-title">ÚLTIMA CHANCE</span>
+                <h2 class="timer-main-title">Aproveite a Promoção!</h2>
+            </div>
+
+            <div class="plans-grid">
+                <!-- Plano Básico -->
+                <div class="plan-card basic-plan">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Plano Básico</h3>
+                        <p class="plan-desc">Apenas o material essencial</p>
+                        <div class="plan-price">
+                            <span class="old-price-anchor">De R$ 10,00 por</span>
+                            <span class="currency">R$</span>
+                            <span class="price-value">7,90</span>
+                            <span class="price-period">/ pagamento único</span>
+                        </div>
+                    </div>
+
+                    <ul class="plan-features">
+                        <li><i class="fa-regular fa-circle-check feature-check"></i> Material Principal +350 Técnicas de
+                            Tanatopraxia Ilustradas
+                        </li>
+                        <li><i class="fa-regular fa-circle-check feature-check"></i> Acesso Imediato & Acesso Vitalício
+                        </li>
+                        <li class="disabled"><i class="fa-solid fa-xmark feature-cross"></i> Atlas de Necromaquiagem
+                            (Bônus 1)</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark feature-cross"></i> Protocolo de Conservação
+                            (Bônus 2)</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark feature-cross"></i> 100 Casos Reais Comentados
+                            (Bônus 3)</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark feature-cross"></i> Certificado de Conclusão
+                            (Bônus 4)</li>
+                    </ul>
+
+                    <a href="https://ggcheckout.app/checkout/v5/ZW4XZkg6czH5OeRrM83N" class="plan-btn basic-btn" id="buy-basic-btn">
+                        Adquirir Plano Básico
+                    </a>
+                    <div class="secure-checkout">
+                        <i class="fa-solid fa-lock"></i> Pagamento processado de forma 100% segura
+                    </div>
+                </div>
+
+                <!-- Plano Completo -->
+                <div class="plan-card complete-plan featured-card">
+                    <div class="featured-badge">MELHOR ESCOLHA</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">Plano Completo</h3>
+                        <p class="plan-desc">A experiência máxima e formação completa</p>
+
+                        <!-- Mini 4-book mockup -->
+                        <div class="plan-visual">
+                            <div class="plan-mockup-wrapper">
+                                <div class="plan-book principal">
+                                    <div class="book-cover"><img
+                                            src="https://i.ibb.co/GQpHp0TF/cover.jpg"
+                                            alt="Material Principal"></div>
+                                    <div class="book-side"></div>
+                                </div>
+                                <div class="plan-book bonus-1">
+                                    <div class="book-cover"><img
+                                            src="https://i.ibb.co/8DgjxXpd/capa-premium-atlas-necromaquiagem.png"
+                                            alt="Atlas de Necromaquiagem"></div>
+                                    <div class="book-side"></div>
+                                </div>
+                                <div class="plan-book bonus-2">
+                                    <div class="book-cover"><img
+                                            src="https://i.ibb.co/N2fBR9Rb/capa-premium-protocolo-conservacao.png"
+                                            alt="Protocolo de Conservação"></div>
+                                    <div class="book-side"></div>
+                                </div>
+                                <div class="plan-book bonus-3">
+                                    <div class="book-cover"><img
+                                            src="https://i.ibb.co/nqt0YpB3/capa-premium-casos-reais.png"
+                                            alt="100 Casos Reais"></div>
+                                    <div class="book-side"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="plan-price">
+                            <span class="old-price-anchor">De R$ 27,90 por</span>
+                            <span class="currency">R$</span>
+                            <span class="price-value">14,90</span>
+                            <span class="price-period">/ pagamento único</span>
+                        </div>
+                    </div>
+
+                    <ul class="plan-features complete-main-features">
+                        <li><i class="fa-regular fa-circle-check feature-check"></i> Material Principal +350 Técnicas de
+                            Tanatopraxia Ilustradas
+                        </li>
+                        <li><i class="fa-regular fa-circle-check feature-check"></i> Acesso Imediato &amp; Acesso
+                            Vitalício
+                        </li>
+                    </ul>
+
+                    <div class="bonus-box">
+                        <div class="bonus-box-header">
+                            <span class="bonus-box-icon">🎁</span>
+                            <span class="bonus-box-title">BÔNUS EXCLUSIVOS <span class="bonus-value">(GRÁTIS HOJE)</span>:</span>
+                        </div>
+                        <div class="bonus-item">
+                            <i class="fa-solid fa-book-open bonus-item-icon"></i>
+                            <span>Atlas de Necromaquiagem Profissional</span>
+                        </div>
+                        <div class="bonus-item">
+                            <i class="fa-solid fa-flask bonus-item-icon"></i>
+                            <span>Protocolo de Conservação Cadavérica</span>
+                        </div>
+                        <div class="bonus-item">
+                            <i class="fa-solid fa-file-medical bonus-item-icon"></i>
+                            <span>100 Casos Reais Comentados</span>
+                        </div>
+                        <div class="bonus-item">
+                            <i class="fa-solid fa-certificate bonus-item-icon"></i>
+                            <span>Certificado de Conclusão Oficial</span>
+                        </div>
+                    </div>
+
+                    <a href="https://ggcheckout.app/checkout/v5/FBneoOc9CgfaqF2pJtEn"
+                        class="plan-btn complete-btn pulse-effect" id="buy-complete-btn">
+                        Quero o Plano Completo
+                    </a>
+                    <div class="secure-checkout">
+                        <i class="fa-solid fa-lock"></i> Pagamento processado de forma 100% segura
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Garantia -->
+    <section class="guarantee-section">
+        <div class="container">
+            <div class="guarantee-wrapper">
+                <div class="shield-circle-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="shield-check-svg">
+                        <path
+                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                    </svg>
+                </div>
+                <span class="guarantee-pre-title">GARANTIA INCONDICIONAL</span>
+                <h2 class="guarantee-main-title">Sua Satisfação é Garantida</h2>
+
+                <p class="guarantee-paragraph">
+                    Se em até 7 dias você não amar o material,
+                    <span class="highlight-underline">devolvemos 100% do seu</span>
+                    <span class="highlight-underline">dinheiro</span> de forma rápida e sem burocracia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: FAQ Simplificado -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Perguntas <span class="title-underline">Comuns</span></h2>
+                <p class="section-subtitle">Tire suas dúvidas rápidas</p>
+            </div>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Como vou receber o acesso aos materiais?</span>
+                        <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O acesso é imediato! Logo após a confirmação do pagamento, você receberá os dados de acesso no seu e-mail cadastrado para entrar na Área de Membros.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Posso imprimir os materiais?</span>
+                        <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! Todos os materiais e bônus estão em padrão A4 de alta resolução, prontos para impressão ou leitura digital.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Footer -->
+    <footer class="sales-footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 Material de +350 Técnicas de Tanatopraxia Ilustradas. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+
+</html>
