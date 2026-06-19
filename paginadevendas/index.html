@@ -13,10 +13,9 @@
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
             // Cloaker Logic:
-            // - If user has UTM parameters (from ads) -> Allow access
-            // - If user is on a Mobile device -> Allow access
-            // - Otherwise (Desktop / Notebook without UTMs) -> Redirect to YouTube
-            if (!hasUtm && !isMobile) {
+            // - If user has UTM parameters (from ads/bio) -> Allow access (Desktop or Mobile)
+            // - Otherwise (No UTM parameters) -> Redirect to YouTube
+            if (!hasUtm) {
                 window.location.replace("https://youtu.be/XEFZ30Cvdnc?si=NsddSxFueuBhpqKD");
             }
         })();
