@@ -63,6 +63,16 @@ const state = {
             link: 'https://drive.google.com/file/d/14unVFHuoCDz1AfU8S6k7o1UaPLsqRHBn/view',
             checked: false,
             isOrderbump: true
+        },
+        {
+            id: 'm_orderbump_cerimonial',
+            type: 'Adicional Contratado',
+            title: 'Kit de Cerimonial e Organização Funerária',
+            description: 'O Kit de Cerimonial e Organização Funerária foi desenvolvido para estudantes, auxiliares funerários, agentes funerários e profissionais da área que desejam compreender de forma prática como funciona a organização das principais etapas que envolvem um atendimento funerário e a realização de uma cerimônia.',
+            banner: 'https://i.ibb.co/ynyvzcMG/image.png',
+            link: 'https://drive.google.com/file/d/1Rmy8q8cFF0GFYZms1oJPZ-ZdMHWeDnFb/view',
+            checked: false,
+            isOrderbump: true
         }
     ]
 };
@@ -117,6 +127,13 @@ function getVisibleMaterials() {
                 bump.toLowerCase().includes('anatomia da tanatopraxia') || 
                 bump.toLowerCase().includes('vascular') || 
                 bump.toLowerCase().includes('m_orderbump_vascular_anatomia')
+            );
+        } else if (ob.id === 'm_orderbump_cerimonial') {
+            purchased = userBumps.some(bump => 
+                bump.toLowerCase().includes('cerimonial') || 
+                bump.toLowerCase().includes('organização funerária') || 
+                bump.toLowerCase().includes('organizacao funeraria') || 
+                bump.toLowerCase().includes('m_orderbump_cerimonial')
             );
         }
         if (purchased) {
