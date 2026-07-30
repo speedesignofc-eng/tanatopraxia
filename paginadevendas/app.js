@@ -205,8 +205,11 @@ function initExitIntentAndBackRedirect() {
     // Monitora cliques para checkouts para não disparar a saída durante a navegação
     function setNavigatingAway(e) {
         const link = e.target.closest("a");
-        if (link && link.href && link.href.includes("ggcheckout.app")) {
-            isNavigatingAway = true;
+        if (link && link.href) {
+            const href = link.getAttribute("href");
+            if (link.href.includes("ggcheckout.app") || (href && href.startsWith("#"))) {
+                isNavigatingAway = true;
+            }
         }
     }
     document.addEventListener("mousedown", setNavigatingAway);
