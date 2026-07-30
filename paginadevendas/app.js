@@ -227,14 +227,4 @@ function initExitIntentAndBackRedirect() {
             window.location.href = backUrl;
         }
     });
-
-    // 2. Lógica de Intenção de Saída (Cursor saindo pelo topo da tela)
-    let exitTriggered = false;
-    document.addEventListener("mouseleave", (event) => {
-        if (isNavigatingAway) return;
-        if (!exitTriggered && event.clientY < 20) {
-            exitTriggered = true;
-            window.location.href = backUrl;
-        }
-    });
 }
